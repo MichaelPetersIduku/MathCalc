@@ -1,0 +1,18 @@
+{
+  "name": "mathcalculator",
+  "version": "1.0.0",
+  "description": "A cordova plugin for adding and subtracting two numbers",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "ADD",
+    "SUBTRACT",
+    "CORDOVA",
+    "PLUGIN",
+    "CALCULATOR"
+  ],
+  "author": "Michael Peters",
+  "license": "ISC"
+}
