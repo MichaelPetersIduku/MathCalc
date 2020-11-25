@@ -1,24 +1,45 @@
 package cordova.plugin.pinpad;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.os.AsyncTask;
+import android.os.Handler;
+import android.widget.Toast;
+
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CallbackContext;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
+import com.paypad.cardreader.facade.PinpadFacade;
+import com.paypad.impl.Paypad;
+import cordova.plugin.pinpad.MyBroadcastReceiver;
 
 /**
  * This class echoes a string called from JavaScript.
  */
 public class Pinpad extends CordovaPlugin {
 
+    PinpadFacade pinpadFacade;
+    Handler handler;
+    Paypad paypad;
+    MyBroadcastReceiver myBroadcastReceiver;
+
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
+        paypad = new Paypad(cordova.getContext());
+        handler = new Handler();
+        pinpadFacade = new PinpadFacade(cordova.getContext());
         if (action.equals("add")) {
             this.add(args, callbackContext);
             return true;
         } else if (action.equals("activate")) {
+            myBroadcastReceiver = new MyBroadcastReceiver(callbackContext);
+            IntentFilter filter = new IntentFilter("com.esl.paypadlib");
+            cordova.getContext().registerReceiver(myBroadcastReceiver, filter);
             this.activate(args, callbackContext);
             return true;
         }
@@ -44,13 +65,31 @@ public class Pinpad extends CordovaPlugin {
         if (args != null) {
             try {
                 int code = Integer.parseInt(args.getJSONObject(0).getString("code"));
-
-                callbackContext.success("Activated successfully" + code);
+//                new Activate().execute(code);
+                callbackContext.success("Activated Successfully"+code);
             } catch (Exception e) {
                 callbackContext.error("Some error occured \n" + e);
             }
         } else {
             callbackContext.error("Do not pass a null value");
+        }
+    }
+
+    class Activate extends AsyncTask<String, String, Long> {
+
+        @Override
+        protected Long doInBackground(String... params) {
+            String regActivationCode = params[0];
+
+            paypad.activate(regActivationCode);
+
+            return null;
+
+        }
+
+        // This is executed in the context of the main GUI thread
+        protected void onPostExecute(Long result) {
+
         }
     }
 }
