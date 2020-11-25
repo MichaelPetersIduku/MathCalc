@@ -11,6 +11,10 @@
          </feature>
       </config-file>
       <config-file parent="/*" target="AndroidManifest.xml" />
+      <framework src="src/android/build.gradle" custom="true" type="gradleReference" />
+    <resource-file src="src/android/libs/paypadlib.aar" target="libs/paypadlib.aar" />
       <source-file src="src/android/Pinpad.java" target-dir="src/cordova/plugin/pinpad/Pinpad" />
+      <source-file src="src/android/DeviceActivity.java" target-dir="src/cordova/plugin/paypad/activities/DeviceActivity" />
+      <source-file src="src/android/screen_device.xml" target-dir="res/layout" />
    </platform>
 </plugin>

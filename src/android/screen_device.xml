@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:minWidth="300dp"
+    android:layout_height="fill_parent"
+    android:background="#D3C577"
+    android:orientation="vertical" >
+
+    <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Please select Pinpad"
+            android:textSize="16sp"
+            android:textColor="#ffffff"
+            android:background="#917C3E"
+            android:padding="8dp"/>
+
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:scrollingCache="false"
+            android:layout_weight="0.5">
+        </ListView>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:background="#917C3E"
+            android:layout_height="50dp"
+            android:padding="5dp">
+
+            <Button
+                android:id="@+id/cancel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:layout_centerInParent="true"
+                android:background="@android:drawable/screen_background_dark_transparent"
+                android:text="Cancel" />
+        </RelativeLayout>
+
+</LinearLayout>
