@@ -1,17 +1,16 @@
 {
-  "name": "mathcalculator",
+  "name": "pinpad",
   "version": "1.0.0",
-  "description": "A cordova plugin for adding and subtracting two numbers",
+  "description": "A cordova plugin for esl pinpad",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
-    "ADD",
-    "SUBTRACT",
-    "CORDOVA",
-    "PLUGIN",
-    "CALCULATOR"
+    "ESL",
+    "Agency banking",
+    "Fintech",
+    "SDK"
   ],
   "author": "Michael Peters",
   "license": "ISC"

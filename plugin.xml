@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android" id="cordova-plugin-mathcalculator" version="1.0.0">
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android" id="cordova-plugin-pinpad" version="1.0.0">
    <name>MathCalculator</name>
-   <js-module name="MathCalculator" src="www/MathCalculator.js">
-      <clobbers target="MathCalculator" />
+   <js-module name="Pinpad" src="www/Pinpad.js">
+      <clobbers target="Pinpad" />
    </js-module>
    <platform name="android">
       <config-file parent="/*" target="res/xml/config.xml">
-         <feature name="MathCalculator">
-            <param name="android-package" value="cordova.plugin.mathcalculator.MathCalculator" />
+         <feature name="Pinpad">
+            <param name="android-package" value="cordova.plugin.pinpad.Pinpad" />
          </feature>
       </config-file>
       <config-file parent="/*" target="AndroidManifest.xml" />
-      <source-file src="src/android/MathCalculator.java" target-dir="src/cordova/plugin/mathcalculator/MathCalculator" />
+      <source-file src="src/android/Pinpad.java" target-dir="src/cordova/plugin/pinpad/Pinpad" />
    </platform>
 </plugin>

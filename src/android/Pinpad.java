@@ -1,4 +1,4 @@
-package cordova.plugin.mathcalculator;
+package cordova.plugin.pinpad;
 
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CallbackContext;
@@ -10,15 +10,14 @@ import org.json.JSONObject;
 /**
  * This class echoes a string called from JavaScript.
  */
-public class MathCalculator extends CordovaPlugin {
+public class Pinpad extends CordovaPlugin {
 
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
         if (action.equals("add")) {
             this.add(args, callbackContext);
             return true;
-        }
-        else if (action.equals("subtract")) {
+        } else if (action.equals("activate")) {
             this.subtract(args, callbackContext);
             return true;
         }
@@ -31,13 +30,11 @@ public class MathCalculator extends CordovaPlugin {
                 int num1 = Integer.parseInt(args.getJSONObject(0).getString("num1"));
                 int num2 = Integer.parseInt(args.getJSONObject(0).getString("num2"));
 
-                callbackContext.success("" + (num1+num2));
+                callbackContext.success("" + (num1 + num2));
+            } catch (Exception e) {
+                callbackContext.error("Some error occured \n" + e);
             }
-            catch(Exception e) {
-                callbackContext.error("Some error occured \n"+e);
-            }
-        }
-        else {
+        } else {
             callbackContext.error("Do not pass a null value");
         }
     }
@@ -48,13 +45,11 @@ public class MathCalculator extends CordovaPlugin {
                 int num1 = Integer.parseInt(args.getJSONObject(0).getString("num1"));
                 int num2 = Integer.parseInt(args.getJSONObject(0).getString("num2"));
 
-                callbackContext.success("" + (num1-num2));
+                callbackContext.success("" + (num1 - num2));
+            } catch (Exception e) {
+                callbackContext.error("Some error occured \n" + e);
             }
-            catch(Exception e) {
-                callbackContext.error("Some error occured \n"+e);
-            }
-        }
-        else {
+        } else {
             callbackContext.error("Do not pass a null value");
         }
     }
