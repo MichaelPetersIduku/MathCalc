@@ -64,9 +64,12 @@ public class Pinpad extends CordovaPlugin {
     private void activate(JSONArray args, CallbackContext callbackContext) {
         if (args != null) {
             try {
-                int code = Integer.parseInt(args.getJSONObject(0).getString("code"));
-//                new Activate().execute(code);
-                callbackContext.success("Activated Successfully"+code);
+                String code = args.getJSONObject(0).getString("code");
+                if (code != "") {
+                    new Activate().execute(code);
+                } else {
+                    callbackContext.error("Do not pass an empty string");
+                }
             } catch (Exception e) {
                 callbackContext.error("Some error occured \n" + e);
             }
