@@ -18,7 +18,7 @@ public class Pinpad extends CordovaPlugin {
             this.add(args, callbackContext);
             return true;
         } else if (action.equals("activate")) {
-            this.subtract(args, callbackContext);
+            this.activate(args, callbackContext);
             return true;
         }
         return false;
@@ -39,13 +39,12 @@ public class Pinpad extends CordovaPlugin {
         }
     }
 
-    private void subtract(JSONArray args, CallbackContext callbackContext) {
+    private void activate(JSONArray args, CallbackContext callbackContext) {
         if (args != null) {
             try {
-                int num1 = Integer.parseInt(args.getJSONObject(0).getString("num1"));
-                int num2 = Integer.parseInt(args.getJSONObject(0).getString("num2"));
+                int code = Integer.parseInt(args.getJSONObject(0).getString("code"));
 
-                callbackContext.success("" + (num1 - num2));
+                callbackContext.success("Activated successfully" + code);
             } catch (Exception e) {
                 callbackContext.error("Some error occured \n" + e);
             }
