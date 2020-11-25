@@ -65,10 +65,10 @@ public class Pinpad extends CordovaPlugin {
         if (args != null) {
             try {
                 String code = args.getJSONObject(0).getString("code");
-                if (code != "") {
-                    new Activate().execute(code);
-                } else {
+                if (code.equals("")) {
                     callbackContext.error("Do not pass an empty string");
+                } else {
+                    new Activate().execute(code);
                 }
             } catch (Exception e) {
                 callbackContext.error("Some error occured \n" + e);
