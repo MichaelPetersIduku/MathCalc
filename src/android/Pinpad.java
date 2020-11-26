@@ -64,6 +64,21 @@ public class Pinpad extends CordovaPlugin {
     }
 
     @Override
+    protected void onPause() {
+
+        super.onPause();
+        cordova.getContext().unregisterReceiver(myBroadcastReceiver);
+    }
+
+    @Override
+    protected void onResume() {
+
+        super.onResume();
+        cordova.getContext().registerReceiver(myBroadcastReceiver, new IntentFilter(
+                "com.esl.paypadlib"));
+    }
+
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         pinpadFacade.onActivityResult(requestCode, resultCode, intent);
     }
