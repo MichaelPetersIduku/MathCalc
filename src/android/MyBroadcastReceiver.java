@@ -1,4 +1,4 @@
-package cordova.plugin.pinpad;
+package cordova.plugin.pinpad.PinpadClass;
 
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;

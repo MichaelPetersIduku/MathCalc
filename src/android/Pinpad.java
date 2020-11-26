@@ -1,12 +1,9 @@
-package cordova.plugin.pinpad;
+package cordova.plugin.pinpad.PinpadClass;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.AsyncTask;
 import android.os.Handler;
-import android.widget.Toast;
 
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CallbackContext;
@@ -16,7 +13,6 @@ import org.json.JSONException;
 
 import com.paypad.cardreader.facade.PinpadFacade;
 import com.paypad.impl.Paypad;
-import cordova.plugin.pinpad.MyBroadcastReceiver;
 
 /**
  * This class echoes a string called from JavaScript.
@@ -47,7 +43,7 @@ public class Pinpad extends CordovaPlugin {
     }
 
     private void initialize(JSONArray args, CallbackContext callbackContext) {
-        new Initialize().execute(cordova.plugin.paypad.activities.DeviceActivity.DeviceActivity.class);
+        new Initialize().execute(cordova.plugin.pinpad.activities.ActivityClass.DeviceActivity.class);
     }
 
     private void activate(JSONArray args, CallbackContext callbackContext) {
@@ -65,6 +61,11 @@ public class Pinpad extends CordovaPlugin {
         } else {
             callbackContext.error("Do not pass a null value");
         }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        pinpadFacade.onActivityResult(requestCode, resultCode, intent);
     }
 
     class Activate extends AsyncTask<String, String, Long> {

@@ -1,4 +1,4 @@
-package cordova.plugin.paypad.activities.DeviceActivity;
+package cordova.plugin.pinpad.activities.ActivityClass;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
