@@ -33,8 +33,8 @@ public class Pinpad extends CordovaPlugin {
         paypad = new Paypad(cordova.getContext());
         handler = new Handler();
         pinpadFacade = new PinpadFacade(cordova.getContext());
-        if (action.equals("add")) {
-            this.add(args, callbackContext);
+        if (action.equals("initialize")) {
+            this.initialize(args, callbackContext);
             return true;
         } else if (action.equals("activate")) {
             myBroadcastReceiver = new MyBroadcastReceiver(callbackContext);
@@ -46,19 +46,8 @@ public class Pinpad extends CordovaPlugin {
         return false;
     }
 
-    private void add(JSONArray args, CallbackContext callbackContext) {
-        if (args != null) {
-            try {
-                int num1 = Integer.parseInt(args.getJSONObject(0).getString("num1"));
-                int num2 = Integer.parseInt(args.getJSONObject(0).getString("num2"));
-
-                callbackContext.success("" + (num1 + num2));
-            } catch (Exception e) {
-                callbackContext.error("Some error occured \n" + e);
-            }
-        } else {
-            callbackContext.error("Do not pass a null value");
-        }
+    private void initialize(JSONArray args, CallbackContext callbackContext) {
+        new Initialize().execute(cordova.plugin.paypad.activities.DeviceActivity.DeviceActivity.class);
     }
 
     private void activate(JSONArray args, CallbackContext callbackContext) {
@@ -85,6 +74,23 @@ public class Pinpad extends CordovaPlugin {
             String regActivationCode = params[0];
 
             paypad.activate(regActivationCode);
+
+            return null;
+
+        }
+
+        // This is executed in the context of the main GUI thread
+        protected void onPostExecute(Long result) {
+
+        }
+    }
+
+    class Initialize extends AsyncTask<Class<?>, String, Long> {
+
+        @Override
+        protected Long doInBackground(Class<?>... params) {
+            Class<?> classactivity = params[0];
+            paypad.initialize(classactivity);
 
             return null;
 
