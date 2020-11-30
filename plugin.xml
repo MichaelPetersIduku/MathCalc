@@ -13,7 +13,7 @@
       <config-file parent="/*" target="AndroidManifest.xml" />
       <config-file target="AndroidManifest.xml" parent="/manifest/application">
     <activity
-            android:name="com.paypad.activities.DeviceActivity"
+            android:name="cordova.plugin.pinpad.activities.ActivityClass.DeviceActivity"
             android:label="Device"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Dialog">
