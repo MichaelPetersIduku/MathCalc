@@ -43,8 +43,20 @@ public class Pinpad extends CordovaPlugin {
             return true;
         } else if (action.equals("connect")) {
             this.connect(args, callbackContext);
+        } else if (action.equals("makePayment")) {
+            this.makePayment(args, callbackContext);
         }
         return false;
+    }
+
+    private void makePayment(JSONArray args, CallbackContext callbackContext) {
+        try {
+            String amount = args.getJSONObject(0).getString("amount");
+            String accountType = args.getJSONObject(0).getString("accountType");
+            paypad.makePayment(amount, accountType);
+        } catch (Exception e) {
+            callbackContext.error("Some error occured \n" + e);
+        }
     }
 
     private void connect(JSONArray args, CallbackContext callbackContext) {

@@ -1,5 +1,9 @@
 var exec = require('cordova/exec');
 
+module.exports.makePayment = function(arg0, success, error) {
+    exec(success, error, 'Pinpad', 'makePayment', [arg0])
+}
+
 module.exports.connect = function(arg0, success, error) {
     exec(success, error, 'Pinpad', 'connect', [arg0])
 }
