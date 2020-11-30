@@ -7,7 +7,7 @@
    <platform name="android">
       <config-file parent="/*" target="res/xml/config.xml">
          <feature name="Pinpad">
-            <param name="android-package" value="cordova.plugin.pinpad.Pinpad" />
+            <param name="android-package" value="cordova.plugin.pinpad.PinpadClass.Pinpad" />
          </feature>
       </config-file>
       <config-file parent="/*" target="AndroidManifest.xml" />
