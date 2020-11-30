@@ -49,7 +49,6 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
                             .show();
                 } else if (result.equals("startInitializeprogress")) {
                     Toast.makeText(context, "Initializing...", Toast.LENGTH_SHORT).show();
-
                 } else if (result.equals("Initializecomplete")) {
                     Toast.makeText(context,
                             "Initialized Successfully", Toast.LENGTH_LONG)

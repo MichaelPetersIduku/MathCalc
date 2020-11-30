@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.AsyncTask;
 import android.os.Handler;
+import android.widget.Toast;
 
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CallbackContext;
@@ -13,6 +14,8 @@ import org.json.JSONException;
 
 import com.paypad.cardreader.facade.PinpadFacade;
 import com.paypad.impl.Paypad;
+
+import cordova.plugin.pinpad.activities.ActivityClass.DeviceActivity;
 
 /**
  * This class echoes a string called from JavaScript.
@@ -29,13 +32,13 @@ public class Pinpad extends CordovaPlugin {
         paypad = new Paypad(cordova.getContext());
         handler = new Handler();
         pinpadFacade = new PinpadFacade(cordova.getContext());
+        myBroadcastReceiver = new MyBroadcastReceiver(callbackContext);
+        IntentFilter filter = new IntentFilter("com.esl.paypadlib");
+        cordova.getContext().registerReceiver(myBroadcastReceiver, filter);
         if (action.equals("initialize")) {
             this.initialize(args, callbackContext);
             return true;
         } else if (action.equals("activate")) {
-            myBroadcastReceiver = new MyBroadcastReceiver(callbackContext);
-            IntentFilter filter = new IntentFilter("com.esl.paypadlib");
-            cordova.getContext().registerReceiver(myBroadcastReceiver, filter);
             this.activate(args, callbackContext);
             return true;
         }
@@ -43,6 +46,7 @@ public class Pinpad extends CordovaPlugin {
     }
 
     private void initialize(JSONArray args, CallbackContext callbackContext) {
+        cordova.setActivityResultCallback((CordovaPlugin) this);
         new Initialize().execute(cordova.plugin.pinpad.activities.ActivityClass.DeviceActivity.class);
     }
 
@@ -78,6 +82,7 @@ public class Pinpad extends CordovaPlugin {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        Toast.makeText(cordova.getContext(), "Got result"+resultCode+requestCode, Toast.LENGTH_LONG).show();
         pinpadFacade.onActivityResult(requestCode, resultCode, intent);
     }
 
@@ -105,7 +110,6 @@ public class Pinpad extends CordovaPlugin {
         protected Long doInBackground(Class<?>... params) {
             Class<?> classactivity = params[0];
             paypad.initialize(classactivity);
-
             return null;
 
         }

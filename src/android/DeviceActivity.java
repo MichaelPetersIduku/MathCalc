@@ -7,6 +7,7 @@ import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnKeyListener;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.KeyEvent;
@@ -206,7 +207,7 @@ public class DeviceActivity extends Activity {
                     mPinpadManager.connect(btAddress, getApplicationContext());
                 } catch (IOException e) {
                     e.printStackTrace();
-                    showToast("Fialed to connect to Pinpad");
+                    showToast("Failed to connect to Pinpad");
                     if (Globals.autoConnect) { // show dialog after auto connecting failed
                         deviceActivityHandler.post(new Runnable() {
                             @Override
