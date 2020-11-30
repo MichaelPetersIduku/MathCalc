@@ -11,6 +11,19 @@
          </feature>
       </config-file>
       <config-file parent="/*" target="AndroidManifest.xml" />
+      <edit-config file="AndroidManifest.xml" target="/manifest/application/activity" mode="merge">
+    <activity
+            android:name="cordova.plugin.pinpad.activities.ActivityClass.DeviceActivity"
+            android:label="Device"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Dialog">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+</edit-config>
       <framework src="src/android/build.gradle" custom="true" type="gradleReference" />
     <resource-file src="src/android/libs/paypadlib.aar" target="libs/paypadlib.aar" />
       <source-file src="src/android/Pinpad.java" target-dir="src/cordova/plugin/pinpad/PinpadClass" />
