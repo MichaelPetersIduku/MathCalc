@@ -41,8 +41,14 @@ public class Pinpad extends CordovaPlugin {
         } else if (action.equals("activate")) {
             this.activate(args, callbackContext);
             return true;
+        } else if (action.equals("connect")) {
+            this.connect(args, callbackContext);
         }
         return false;
+    }
+
+    private void connect(JSONArray args, CallbackContext callbackContext) {
+        paypad.connect(DeviceActivity.class);
     }
 
     private void initialize(JSONArray args, CallbackContext callbackContext) {
