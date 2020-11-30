@@ -11,15 +11,9 @@
          </feature>
       </config-file>
       <config-file parent="/*" target="AndroidManifest.xml" />
-      <edit-config file="AndroidManifest.xml" target="/manifest/application/activity" mode="merge">
-      <activity android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|smallestScreenSize|screenLayout|uiMode" android:label="@string/activity_name" android:launchMode="singleTop" android:name="MainActivity" android:theme="@android:style/Theme.DeviceDefault.NoActionBar" android:windowSoftInputMode="adjustResize">
-            <intent-filter android:label="@string/launcher_name">
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+      <config-file target="AndroidManifest.xml" parent="/manifest/application">
     <activity
-            android:name="cordova.plugin.pinpad.activities.ActivityClass.DeviceActivity"
+            android:name="com.paypad.activities.DeviceActivity"
             android:label="Device"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Dialog">
@@ -29,7 +23,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-</edit-config>
+</config-file>
       <framework src="src/android/build.gradle" custom="true" type="gradleReference" />
     <resource-file src="src/android/libs/paypadlib.aar" target="libs/paypadlib.aar" />
       <source-file src="src/android/Pinpad.java" target-dir="src/cordova/plugin/pinpad/PinpadClass" />
