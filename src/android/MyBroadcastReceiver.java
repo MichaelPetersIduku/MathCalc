@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.widget.Toast;
 
 import org.apache.cordova.CallbackContext;
+import org.json.JSONObject;
 
 public class MyBroadcastReceiver extends BroadcastReceiver {
 
@@ -94,7 +95,25 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
                         Toast.makeText(context,
                                 resultarray[i], Toast.LENGTH_SHORT).show();
                     }
-                    this.mCallbackContext.success(resultarray[1]);
+                    try {
+                        JSONObject response = new JSONObject();
+                        response.put("code", resultarray[0]);
+                        response.put("message", resultarray[1]);
+                        response.put("terminalId", resultarray[2]);
+                        response.put("pan", resultarray[3]);
+                        response.put("cardName", resultarray[4]);
+                        response.put("amount", resultarray[5]);
+                        response.put("date", resultarray[6]);
+                        response.put("transactionId", resultarray[7]);
+                        if (resultarray.length == 9) response.put("rrn", resultarray[8]);
+                        if (response.getString("code").equals("00") || response.getString("code").equals("10")) {
+                            this.mCallbackContext.success(response);
+                        } else {
+                            this.mCallbackContext.error(response);
+                        }
+                    } catch(Exception e) {
+                        this.mCallbackContext.error(resultarray[1]);
+                    }
                 } else if (result.equals("reversal")) {
 
                     Toast.makeText(context,

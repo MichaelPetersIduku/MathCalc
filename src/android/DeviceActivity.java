@@ -144,6 +144,7 @@ public class DeviceActivity extends Activity {
                 .setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        Toast.makeText(getApplicationContext(), "Closed", Toast.LENGTH_SHORT).show();
                         finish();
                     }
                 });
