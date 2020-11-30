@@ -18,109 +18,110 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
 
-        if (intent != null && intent.getAction() != null) {
-            String s = intent.getAction();
-            if (s.equals("com.esl.paypadlib")) {
+        try {
+            if (intent != null && intent.getAction() != null) {
+                String s = intent.getAction();
+                if (s.equals("com.esl.paypadlib")) {
 
-                String result = intent.getStringExtra("response");
-                String[] resultarray = intent
-                        .getStringArrayExtra("responsearray");
-                String reversalResult = intent.getStringExtra("reversalResult");
-                String encryptedMessage = intent.getStringExtra("encryptedMessage");
+                    String result = intent.getStringExtra("response");
+                    String[] resultarray = intent
+                            .getStringArrayExtra("responsearray");
+                    String reversalResult = intent.getStringExtra("reversalResult");
+                    String encryptedMessage = intent.getStringExtra("encryptedMessage");
 
-                if (result.equals("activatecomplete")) {
-                    Toast.makeText(context,
-                            "Activated Successfully", Toast.LENGTH_LONG)
-                            .show();
-                    this.mCallbackContext.success("Activated successfully");
-                } else if (result.equals("invalidcode")) {
-                    Toast.makeText(context,
-                            "Invalid Activation Code", Toast.LENGTH_LONG)
-                            .show();
-                    this.mCallbackContext.error("Invalid Activation Code");
-                } else if (result.equals("failedactivation")) {
-                    Toast.makeText(context,
-                            "Activation not Successful", Toast.LENGTH_LONG)
-                            .show();
-                    this.mCallbackContext.error("Activation was not successful");
-                } else if (result.equals("connected")) {
-//						mProgressDialog.dismiss();
-                    Toast.makeText(context,
-                            "Device is connected", Toast.LENGTH_LONG)
-                            .show();
-                } else if (result.equals("startInitializeprogress")) {
-                    Toast.makeText(context, "Initializing...", Toast.LENGTH_SHORT).show();
-                } else if (result.equals("Initializecomplete")) {
-                    Toast.makeText(context,
-                            "Initialized Successfully", Toast.LENGTH_LONG)
-                            .show();
-                    this.mCallbackContext.success("Initialized Successfully");
-                } else if (result.equals("initializenotcomplete")) {
-                    Toast.makeText(context,
-                            "Initialization not Successful",
-                            Toast.LENGTH_LONG).show();
-                    this.mCallbackContext.error("Initialization not Successful");
-                } else if (result.equals("pinpadProcessing")) {
-                    Toast.makeText(context,
-                            "Processing, please wait...",
-                            Toast.LENGTH_LONG).show();
-                } else if (result.equals("enterPIN")) {
-                    Toast.makeText(context,
-                            "Enter PIN",
-                            Toast.LENGTH_LONG).show();
-
-
-                } else if (result.equals("PINentered")) {
-                    Toast.makeText(context,
-                            "PIN entered",
-                            Toast.LENGTH_SHORT).show();
-
-                } else if (result.equals("nibssProcessing")) {
-                    Toast.makeText(context,
-                            "Processing Transaction",
-                            Toast.LENGTH_LONG).show();
-                } else if (result.equals("errorTranx")) {
-                    Toast.makeText(context,
-                            "Some error occured", Toast.LENGTH_LONG)
-                            .show();
-                    this.mCallbackContext.error("Some error occured");
-                } else if (result.equals("transactionresponse")) {
-                    /*
-                     * The returned String array has the following element
-                     * with the indices below 0-Response Code 1-Response
-                     * 2-Terminal ID 3-PAN 4-Card holder name 5-Date
-                     * 6-Amount 7-Transaction ID 8-RRN
-                     */
-                    for (int i = 0; i < resultarray.length; i++) {
+                    if (result.equals("activatecomplete")) {
                         Toast.makeText(context,
-                                resultarray[i], Toast.LENGTH_SHORT).show();
-                    }
-                    try {
-                        JSONObject response = new JSONObject();
-                        response.put("code", resultarray[0]);
-                        response.put("message", resultarray[1]);
-                        response.put("terminalId", resultarray[2]);
-                        response.put("pan", resultarray[3]);
-                        response.put("cardName", resultarray[4]);
-                        response.put("amount", resultarray[5]);
-                        response.put("date", resultarray[6]);
-                        response.put("transactionId", resultarray[7]);
-                        if (resultarray.length == 9) response.put("rrn", resultarray[8]);
-                        if (response.getString("code").equals("00") || response.getString("code").equals("10")) {
-                            this.mCallbackContext.success(response);
-                        } else {
-                            this.mCallbackContext.error(response);
+                                "Activated Successfully", Toast.LENGTH_LONG)
+                                .show();
+                        this.mCallbackContext.success("Activated successfully");
+                    } else if (result.equals("invalidcode")) {
+                        Toast.makeText(context,
+                                "Invalid Activation Code", Toast.LENGTH_LONG)
+                                .show();
+                        this.mCallbackContext.error("Invalid Activation Code");
+                    } else if (result.equals("failedactivation")) {
+                        Toast.makeText(context,
+                                "Activation not Successful", Toast.LENGTH_LONG)
+                                .show();
+                        this.mCallbackContext.error("Activation was not successful");
+                    } else if (result.equals("connected")) {
+//						mProgressDialog.dismiss();
+                        Toast.makeText(context,
+                                "Device is connected", Toast.LENGTH_LONG)
+                                .show();
+                    } else if (result.equals("startInitializeprogress")) {
+                        Toast.makeText(context, "Initializing...", Toast.LENGTH_SHORT).show();
+                    } else if (result.equals("Initializecomplete")) {
+                        Toast.makeText(context,
+                                "Initialized Successfully", Toast.LENGTH_LONG)
+                                .show();
+                        this.mCallbackContext.success("Initialized Successfully");
+                    } else if (result.equals("initializenotcomplete")) {
+                        Toast.makeText(context,
+                                "Initialization not Successful",
+                                Toast.LENGTH_LONG).show();
+                        this.mCallbackContext.error("Initialization not Successful");
+                    } else if (result.equals("pinpadProcessing")) {
+                        Toast.makeText(context,
+                                "Processing, please wait...",
+                                Toast.LENGTH_LONG).show();
+                    } else if (result.equals("enterPIN")) {
+                        Toast.makeText(context,
+                                "Enter PIN",
+                                Toast.LENGTH_LONG).show();
+
+
+                    } else if (result.equals("PINentered")) {
+                        Toast.makeText(context,
+                                "PIN entered",
+                                Toast.LENGTH_SHORT).show();
+
+                    } else if (result.equals("nibssProcessing")) {
+                        Toast.makeText(context,
+                                "Processing Transaction",
+                                Toast.LENGTH_LONG).show();
+                    } else if (result.equals("errorTranx")) {
+                        Toast.makeText(context,
+                                "Some error occured", Toast.LENGTH_LONG)
+                                .show();
+                        this.mCallbackContext.error("Some error occured");
+                    } else if (result.equals("transactionresponse")) {
+                        /*
+                         * The returned String array has the following element
+                         * with the indices below 0-Response Code 1-Response
+                         * 2-Terminal ID 3-PAN 4-Card holder name 5-Date
+                         * 6-Amount 7-Transaction ID 8-RRN
+                         */
+                        for (int i = 0; i < resultarray.length; i++) {
+                            Toast.makeText(context,
+                                    resultarray[i], Toast.LENGTH_SHORT).show();
                         }
-                    } catch(Exception e) {
-                        this.mCallbackContext.error(resultarray[1]);
-                    }
-                } else if (result.equals("reversal")) {
+                        try {
+                            JSONObject response = new JSONObject();
+                            response.put("code", resultarray[0]);
+                            response.put("message", resultarray[1]);
+                            response.put("terminalId", resultarray[2]);
+                            response.put("pan", resultarray[3]);
+                            response.put("cardName", resultarray[4]);
+                            response.put("amount", resultarray[5]);
+                            response.put("date", resultarray[6]);
+                            response.put("transactionId", resultarray[7]);
+                            if (resultarray.length == 9) response.put("rrn", resultarray[8]);
+                            if (response.getString("code").equals("00") || response.getString("code").equals("10")) {
+                                this.mCallbackContext.success(response);
+                            } else {
+                                this.mCallbackContext.error(response);
+                            }
+                        } catch (Exception e) {
+                            this.mCallbackContext.error(resultarray[1]);
+                        }
+                    } else if (result.equals("reversal")) {
 
-                    Toast.makeText(context,
-                            reversalResult, Toast.LENGTH_SHORT).show();
-                    this.mCallbackContext.error(reversalResult);
+                        Toast.makeText(context,
+                                reversalResult, Toast.LENGTH_SHORT).show();
+                        this.mCallbackContext.error(reversalResult);
 
-                } else if (result.equals("fcmbresponse")) {
+                    } else if (result.equals("fcmbresponse")) {
 
 //                        byte[] dectryptArray = encryptedMessage.getBytes();
 //                        byte[] decarray = Base64.decodeBase64(dectryptArray);
@@ -137,9 +138,11 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
 //                        Toast.makeText(getApplicationContext(),
 //                                message, Toast.LENGTH_LONG).show();
 
+                    }
                 }
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
     }
 }
