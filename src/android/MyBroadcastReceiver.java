@@ -138,6 +138,10 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
 //                        Toast.makeText(getApplicationContext(),
 //                                message, Toast.LENGTH_LONG).show();
 
+                    } else if (result.equals("XX")) {
+                        Toast.makeText(context,
+                                "Some error occured", Toast.LENGTH_SHORT).show();
+                        this.mCallbackContext.error("Error occured");
                     }
                 }
             }
